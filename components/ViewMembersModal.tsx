@@ -7,11 +7,12 @@
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { InfoIcon } from "@components/Icons";
+import { Text } from "@components/Text";
 import { copyWithToast, getUniqueUsername } from "@utils/discord";
 import { sleep } from "@utils/misc";
 import type { RenderModalProps } from "@vencord/discord-types";
 import { findByCodeLazy, findComponentByCodeLazy } from "@webpack";
-import { Constants, FluxDispatcher, GuildChannelStore, GuildMemberStore, GuildRoleStore, Modal, openModal, Parser, RestAPI, ScrollerThin, Text, Tooltip, useEffect, useRef, UserStore, useState } from "@webpack/common";
+import { Constants, FluxDispatcher, GuildChannelStore, GuildMemberStore, GuildRoleStore, Modal, openModal, Parser, RestAPI, ScrollerThin, Tooltip, useEffect, useRef, UserStore, useState } from "@webpack/common";
 
 import { formatMemberExport } from "../format";
 import { cl, GuildUtils } from "../utils";
@@ -22,7 +23,7 @@ const getRoleIconData: GetRoleIconData = findByCodeLazy("convertSurrogateToName"
 
 function LoadingDots({ dotRadius, themed }: { dotRadius: number; themed: boolean; }) {
     return (
-        <ErrorBoundary noop fallback={() => <Text variant="text-md/normal">Loading...</Text>}>
+        <ErrorBoundary noop fallback={() => <Text size="md" weight="normal">Loading...</Text>}>
             <ThreeDots dotRadius={dotRadius} themed={themed} />
         </ErrorBoundary>
     );
@@ -333,20 +334,20 @@ function MembersContainer({ guildId, roleId }: { guildId: string; roleId: string
                             <LoadingDots dotRadius={5} themed={true} />
                         </div>
                     ) : !RMC[roleId] && roleMembers.length === 0 ? (
-                        <Text className={cl("member-list-footer")} variant="text-md/normal">No member found with this role</Text>
+                        <Text className={cl("member-list-footer")} size="md" weight="normal">No member found with this role</Text>
                     ) : RMC[roleId] && RMC[roleId] === roleMembers.length ? (
                         <>
                             <div className={cl("divider")} />
-                            <Text className={cl("member-list-footer")} variant="text-md/normal">All members loaded</Text>
+                            <Text className={cl("member-list-footer")} size="md" weight="normal">All members loaded</Text>
                         </>
                     ) : rolesFetched.has(roleId) ? (
                         <>
                             <div className={cl("divider")} />
-                            <Text className={cl("member-list-footer")} variant="text-md/normal">
+                            <Text className={cl("member-list-footer")} size="md" weight="normal">
                                 {fetchError ? `${roleMembers.length} cached members loaded` : "All cached members loaded"}
                             </Text>
                             {fetchError && (
-                                <Text className={cl("member-list-footer")} variant="text-xs/normal" style={{ opacity: 0.7 }}>
+                                <Text className={cl("member-list-footer")} size="xs" weight="normal" style={{ opacity: 0.7 }}>
                                     {fetchError}
                                 </Text>
                             )}
@@ -401,7 +402,7 @@ function VMWRModal({ guildId, props }: { guildId: string; props: RenderModalProp
                                             )
 
                                         }
-                                        <Text variant="text-md/normal">
+                                        <Text size="md" weight="normal">
                                             {role?.name || "Unknown role"}
                                         </Text>
                                     </div>
